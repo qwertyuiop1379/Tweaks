@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>This condenses all sliders into one that can be cycled through by tapping on the knob.</string>
+			<key>label</key>
+			<string>Tweak Settings</string>
+		</dict>
+		<dict>
+			<key>PostNotification</key>
+			<string>com.qiop1379.powerdown/prefchanged</string> 
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.qiop1379.powerdownprefs</string>
+			<key>key</key>
+			<string>powerTap</string>
+			<key>label</key>
+			<string>Power Tap Mode</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>Changes applied automatically.</string>
+		</dict>
+		<dict>
+			<key>PostNotification</key>
+			<string>com.qiop1379.powerdown/prefchanged</string> 
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.qiop1379.powerdownprefs</string>
+			<key>key</key>
+			<string>powerEnabled</string>
+			<key>label</key>
+			<string>Power slider enabled</string>
+		</dict>
+		<dict>
+			<key>PostNotification</key>
+			<string>com.qiop1379.powerdown/prefchanged</string> 
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.qiop1379.powerdownprefs</string>
+			<key>key</key>
+			<string>respringEnabled</string>
+			<key>label</key>
+			<string>Respring slider enabled</string>
+		</dict>
+		<dict>
+			<key>PostNotification</key>
+			<string>com.qiop1379.powerdown/prefchanged</string> 
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.qiop1379.powerdownprefs</string>
+			<key>key</key>
+			<string>rebootEnabled</string>
+			<key>label</key>
+			<string>LDRestart slider enabled</string>
+		</dict>
+		<dict>
+			<key>PostNotification</key>
+			<string>com.qiop1379.powerdown/prefchanged</string> 
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.qiop1379.powerdownprefs</string>
+			<key>key</key>
+			<string>safeModeEnabled</string>
+			<key>label</key>
+			<string>Safe mode slider enabled</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Developer</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>reddit</string>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>icon</key>
+			<string>reddit.png</string>
+			<key>label</key>
+			<string>Reddit</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>paypal</string>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>icon</key>
+			<string>paypal.png</string>
+			<key>label</key>
+			<string>PayPal</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>github</string>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>icon</key>
+			<string>github.png</string>
+			<key>label</key>
+			<string>GitHub</string>
+		</dict>
+	</array>
+	<key>title</key>
+	<string>PowerDown</string>
+</dict>
+</plist>

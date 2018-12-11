@@ -1,0 +1,8 @@
+{
+    Filter =     {
+        Bundles =         (
+            "com.apple.mobilephone",
+            "com.apple.springboard"
+        );
+    };
+}

@@ -1,0 +1,10 @@
+Package: com.qiop1379.romankeypad
+Name: RomanKeypad
+Depends: mobilesubstrate
+Version: 1.1.1
+Architecture: iphoneos-arm
+Description: Change the buttons in the phone app to Roman numerals
+Maintainer: qwertyuiop1379
+Author: qwertyuiop1379
+Section: Tweaks
+Depiction: https://qwertyuiop1379.github.io/depiction/romankeypad/index.html

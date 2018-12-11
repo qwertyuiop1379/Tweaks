@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>PostNotification</key>
+			<string>Done</string>
+			<key>alpha</key>
+			<false/>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>cellClass</key>
+			<string>CSColorDisplayCell</string>
+			<key>defaults</key>
+			<string>com.qiop1379.dockoutlineprefs</string>
+			<key>defaultsPath</key>
+			<string>/Library/PreferenceBundles/DockOutlinePrefs.bundle</string>
+			<key>fallback</key>
+			<string>ffffff</string>
+			<key>key</key>
+			<string>outlineColor</string>
+			<key>label</key>
+			<string>Outline color</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>respring</string>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Respring</string>
+		</dict>
+	</array>
+	<key>title</key>
+	<string>DockOutline</string>
+</dict>
+</plist>

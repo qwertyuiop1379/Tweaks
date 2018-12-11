@@ -1,0 +1,9 @@
+Package: com.qiop1379.statuscolor
+Name: StatusColor
+Depends: mobilesubstrate, com.creaturesurvive.libcscolorpicker
+Version: 0.0.1
+Architecture: iphoneos-arm
+Description: Color your status bar!
+Maintainer: qwertyuiop1379
+Author: qwertyuiop1379
+Section: Tweaks

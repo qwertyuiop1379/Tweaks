@@ -1,0 +1,10 @@
+Package: com.qiop1379.powerdown
+Name: PowerDown
+Depends: mobilesubstrate, firmware (<= 10.3.3) | com.midnightchips.ldrun
+Architecture: iphoneos-arm
+Description: PowerDown rewritten for iOS 11
+Maintainer: qwertyuiop1379
+Author: qwertyuiop1379
+Section: Tweaks
+Version: 1.2.2
+Depiction: https://qwertyuiop1379.github.io/depiction/powerdown/index.html
