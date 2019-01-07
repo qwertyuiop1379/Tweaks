@@ -3,7 +3,6 @@ ARCHS = arm64
 
 TOOL_NAME = qdexec
 qdexec_FILES = main.mm
-# this is just platform-application
-TARGET_CODESIGN_FLAGS = -S/User/lmao.plist
+TARGET_CODESIGN_FLAGS = -S/User/platform.plist
 
 include $(THEOS_MAKE_PATH)/tool.mk

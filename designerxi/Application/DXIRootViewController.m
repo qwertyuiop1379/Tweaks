@@ -1,20 +1,9 @@
 #import "DXIRootViewController.h"
-#import <mach/error.h>
-#import <spawn.h>
+#import "UIImage+scale.h"
+#import "project.h"
+#import "utils.h"
 
-@implementation Project
-@end
-
-@implementation UIImage (scale)
--(UIImage *)scaleToSize:(CGSize)size
-{
-    UIGraphicsBeginImageContext(size);
-    [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
-    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return scaledImage;
-}
-@end
+NSString *lastOutput;
 
 @implementation DXIRootViewController
 {
@@ -29,9 +18,6 @@
 	UITextView *textView;
 	CGRect frame;
 }
-
-NSString *lastOutput;
-int _system(const char *cmd);
 
 -(void)loadView
 {
@@ -57,9 +43,7 @@ int _system(const char *cmd);
 	{
 		if ([[line substringToIndex:1] isEqual:@"0"] || [[line substringToIndex:1] isEqual:@"1"])
 		{
-			Project *newProject = [Project alloc];
-			newProject.type = [[line substringToIndex:1] intValue];
-			newProject.name = [line substringFromIndex:1];
+			Project *newProject = [[Project alloc] initWithName:[line substringFromIndex:1] type:[[line substringToIndex:1] intValue]];
 			[_objects insertObject:newProject atIndex:0];
 			[self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
 		}
@@ -96,12 +80,10 @@ int _system(const char *cmd);
 		NSString *projectDir = [NSString stringWithFormat:@"/User/Documents/DesignerXI/%d%@", type, name];
 		if (![name isEqual:@""] && ![manager fileExistsAtPath:projectDir])
 		{
-			[manager createDirectoryAtPath:[projectDir stringByAppendingString:(type == 1 ? @"/Bundles":@"")] withIntermediateDirectories:YES attributes:nil error:nil];
+			[manager createDirectoryAtPath:[projectDir stringByAppendingString:type == 1 ? @"/Bundles":@""] withIntermediateDirectories:YES attributes:nil error:nil];
 			NSString *controlFile = [NSString stringWithFormat:@"Package: com.yourcompany.%@\nName: %@\nVersion: 1.0.0\nArchitecture: iphoneos-arm\nDescription: Description\nMaintainer: You\nAuthor: You\nSection: Themes\n", [[name stringByReplacingOccurrencesOfString:@" " withString:@""] lowercaseString], name];
 			[controlFile writeToFile:[projectDir stringByAppendingString:@"/control"] atomically:YES encoding:NSStringEncodingConversionAllowLossy error:nil];
-			Project *newProject = [Project alloc];
-			newProject.name = name;
-			newProject.type = type;
+			Project *newProject = [[Project alloc] initWithName:name type:type];
 			[_objects insertObject:newProject atIndex:0];
 			[self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
 			[self.tableView reloadData];
@@ -124,8 +106,6 @@ int _system(const char *cmd);
 	[choiceAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:choiceAlert animated:YES completion:nil];
 }
-
-#pragma mark - Table View Data Source
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -184,8 +164,6 @@ int _system(const char *cmd);
 		[self removeThemeIcon:indexPath];
 	}
 }
-
-#pragma mark - Table View Delegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -495,11 +473,11 @@ int _system(const char *cmd);
     [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
--(void)buildCurrentProject{ [self doTheDoThing:NO]; }
+-(void)buildCurrentProject{ [self doTheThing:NO]; }
 
--(void)installCurrentProject{ [self doTheDoThing:YES]; }
+-(void)installCurrentProject{ [self doTheThing:YES]; }
 
--(void)doTheDoThing:(BOOL)install
+-(void)doTheThing:(BOOL)install
 {
 	[manager removeItemAtPath:@"/User/Documents/DesignerXI/tmp" error:nil];
 	[manager removeItemAtPath:@"/User/Documents/DesignerXI/package.deb" error:nil];
@@ -533,7 +511,7 @@ int _system(const char *cmd);
 			NSArray *items = [manager contentsOfDirectoryAtPath:[[self getCurrentProjectDirectory] stringByAppendingString:@"/Bundles"] error:nil];
 			if ([items isEqual:@[]])
 			{
-				[self error:@"Error building project" message:@"There are no icons currently added to the theme."];
+				[self error:@"Error building project" message:@"There are no icons in this theme."];
 				[spinner stopAnimating];
 				return;
 			}
@@ -551,7 +529,7 @@ int _system(const char *cmd);
 			_system("/usr/bin/qdexec");
 			if ([lastOutput containsString:@"requested operation requires superuser privilege"])
 			{
-				[self error:@"An error occurred" message:@"Please reinstall this app from Cydia. Your projects will be saved."];
+				[self error:@"An error occurred" message:@"Please reinstall this app. Your projects will be saved."];
 				return;
 			}
 			else if (![lastOutput isEqual:@""] && ![lastOutput containsString:@"anemone"])
@@ -561,7 +539,7 @@ int _system(const char *cmd);
 			}
 		}
 		[spinner stopAnimating];
-		[self error:@"Success" message:(install ? @"Project successfully installed.":@"Project successfully built at /var/mobile/Documents/DesignerXI/package.deb.")];
+		[self error:@"Success" message:install ? @"Project successfully installed.":@"Project successfully built at /var/mobile/Documents/DesignerXI/package.deb."];
 		return;
 	}
 	else
@@ -612,44 +590,3 @@ int _system(const char *cmd);
 	[self presentViewController:alert animated:YES completion:nil];
 }
 @end
-
-// this is stolen from unc0ver, sorry pwn : https://github.com/pwn20wndstuff/Undecimus/blob/master/Undecimus/source/utils.m#L94
-int _system(const char *cmd)
-{
-    posix_spawn_file_actions_t *actions = NULL;
-    posix_spawn_file_actions_t actionsStruct;
-    pid_t Pid = 0;
-    int Status = 0;
-    int out_pipe[2];
-    bool valid_pipe = false;
-    char *myenviron[] = { "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11:/usr/games", "PS1=\\h:\\w \\u\\$", NULL };
-    char *argv[] = {"sh", "-c", (char *)cmd, NULL};
-    valid_pipe = pipe(out_pipe) == ERR_SUCCESS;
-    if (valid_pipe && posix_spawn_file_actions_init(&actionsStruct) == ERR_SUCCESS)
-	{
-        actions = &actionsStruct;
-        posix_spawn_file_actions_adddup2(actions, out_pipe[1], 1);
-        posix_spawn_file_actions_adddup2(actions, out_pipe[1], 2);
-        posix_spawn_file_actions_addclose(actions, out_pipe[0]);
-        posix_spawn_file_actions_addclose(actions, out_pipe[1]);
-    }
-    Status = posix_spawn(&Pid, "/bin/sh", actions, NULL, argv, myenviron);
-    if (valid_pipe)
-	{
-        close(out_pipe[1]);
-    }
-    if (Status == ERR_SUCCESS)
-	{
-        waitpid(Pid, &Status, 0);
-        if (valid_pipe)
-		{
-            NSData *outData = [[[NSFileHandle alloc] initWithFileDescriptor:out_pipe[0]] availableData];
-			lastOutput = [NSString stringWithUTF8String:[outData bytes]];
-        }
-    }
-    if (valid_pipe)
-	{
-        close(out_pipe[0]);
-    }
-    return Status;
-}
