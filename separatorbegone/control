@@ -1,0 +1,9 @@
+Package: com.qiop1379.separatorbegone
+Name: SeparatorBegone!
+Depends: mobilesubstrate
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Remove the separator on UITableViews
+Maintainer: qwertyuiop1379
+Author: qwertyuiop1379
+Section: Tweaks
