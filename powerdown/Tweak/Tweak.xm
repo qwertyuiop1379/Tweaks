@@ -1,10 +1,11 @@
 #import <spawn.h>
-#import <_UIActionSlider.h>
-#import <_UIActionSliderDelegate.h>
+#import "_UIActionSlider.h"
+#import "_UIActionSliderDelegate.h"
 
 @interface SBPowerDownController : UIViewController <_UIActionSliderDelegate, UIGestureRecognizerDelegate>
 +(id)sharedInstance;
 -(void)actionSliderDidCompleteSlide:(id)arg1;
+-(void)animateIn;
 -(void)powerDown;
 @end
 
@@ -58,55 +59,86 @@ int sliderState;
     else
     {
         CGFloat yval = 50;
+        CGFloat thing = 400;
         if ([[prefs objectForKey:@"powerEnabled"] boolValue] == YES || [prefs objectForKey:@"powerEnabled"] == nil)
         {
-            powerSlider = [[%c(_UIActionSlider) alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 200, yval, 400, 75)];
+            powerSlider = [[%c(_UIActionSlider) alloc] initWithFrame:CGRectMake(thing, yval, 400, 75)];
             powerSlider.knobImage = [[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/PowerDown.bundle/power.png"] scaleImage:CGSizeMake(66, 66)];
             powerSlider.delegate = self;
             powerSlider.trackText = @"slide to power off";
             [self.view addSubview:powerSlider];
             yval += 100;
+            thing *= -1;
         }
 
         if ([[prefs objectForKey:@"respringEnabled"] boolValue] == YES || [prefs objectForKey:@"respringEnabled"] == nil)
         {
-            respringSlider = [[%c(_UIActionSlider) alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 200, yval, 400, 75)];
+            respringSlider = [[%c(_UIActionSlider) alloc] initWithFrame:CGRectMake(thing, yval, 400, 75)];
             respringSlider.knobImage = [[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/PowerDown.bundle/respring.png"] scaleImage:CGSizeMake(66, 66)];
             respringSlider.delegate = self;
             respringSlider.trackText = @"slide to respring";
             [self.view addSubview:respringSlider];
             yval += 100;
+            thing *= -1;
         }
 
         if ([[prefs objectForKey:@"rebootEnabled"] boolValue] == YES || [prefs objectForKey:@"rebootEnabled"] == nil)
         {
-            rebootSlider = [[%c(_UIActionSlider) alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 200, yval, 400, 75)];
+            rebootSlider = [[%c(_UIActionSlider) alloc] initWithFrame:CGRectMake(thing, yval, 400, 75)];
             rebootSlider.knobImage = [[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/PowerDown.bundle/reboot.png"] scaleImage:CGSizeMake(66, 66)];
             rebootSlider.knobView.frame = CGRectMake(rebootSlider.frame.origin.x, rebootSlider.frame.origin.y, 66, 66);
             rebootSlider.delegate = self;
             rebootSlider.trackText = @"slide to ldrestart";
             [self.view addSubview:rebootSlider];
             yval += 100;
+            thing *= -1;
         }
 
         if ([[prefs objectForKey:@"safeModeEnabled"] boolValue] == YES || [prefs objectForKey:@"safeModeEnabled"] == nil)
         {
-            safeModeSlider = [[%c(_UIActionSlider) alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 200, yval, 400, 75)];
+            safeModeSlider = [[%c(_UIActionSlider) alloc] initWithFrame:CGRectMake(thing, yval, 400, 75)];
             safeModeSlider.knobImage = [[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/PowerDown.bundle/safemode.png"] scaleImage:CGSizeMake(66, 66)];
             safeModeSlider.delegate = self;
             safeModeSlider.trackText = @"slide to safe mode";
             [self.view addSubview:safeModeSlider];
         }
+
+        [self animateIn];
     }
 }
 
 -(void)cancel
 {
-    [powerSlider removeFromSuperview];
-    [respringSlider removeFromSuperview];
-    [rebootSlider removeFromSuperview];
-    [safeModeSlider removeFromSuperview];
-    %orig;
+    // animate out
+    [UIView animateWithDuration:0.5f animations:^
+    {
+        powerSlider.frame = CGRectMake(-400, powerSlider.frame.origin.y, 400, 75);
+        respringSlider.frame = CGRectMake(self.view.frame.size.width, respringSlider.frame.origin.y, 400, 75);
+        rebootSlider.frame = CGRectMake(-400, rebootSlider.frame.origin.y, 400, 75);
+        safeModeSlider.frame = CGRectMake(self.view.frame.size.width, safeModeSlider.frame.origin.y, 400, 75);
+    }
+    completion:^(BOOL finished)
+    {
+        [powerSlider removeFromSuperview];
+        [respringSlider removeFromSuperview];
+        [rebootSlider removeFromSuperview];
+        [safeModeSlider removeFromSuperview];
+        %orig;
+    }];
+}
+
+%new
+-(void)animateIn
+{
+    [UIView animateWithDuration:0.5f animations:^
+    {
+        CGFloat location = self.view.frame.size.width/2 - 200;
+        powerSlider.frame = CGRectMake(location, powerSlider.frame.origin.y, 400, 75);
+        respringSlider.frame = CGRectMake(location, respringSlider.frame.origin.y, 400, 75);
+        rebootSlider.frame = CGRectMake(location, rebootSlider.frame.origin.y, 400, 75);
+        safeModeSlider.frame = CGRectMake(location, safeModeSlider.frame.origin.y, 400, 75);
+    }
+    completion:nil];
 }
 
 %new
