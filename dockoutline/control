@@ -1,8 +1,7 @@
 Package: com.qiop1379.dockoutline
 Name: DockOutline
 Depends: mobilesubstrate, com.creaturesurvive.libcscolorpicker
-Conflicts: com.synnyg.floatydock
-Version: 1.0.1
+Version: 1.1.0
 Architecture: iphoneos-arm
 Description: Turn the dock into an outline
 Maintainer: qwertyuiop1379

@@ -5,12 +5,10 @@
 	<key>items</key>
 	<array>
 		<dict>
-			<key>PostNotification</key>
-			<string>Done</string>
-			<key>alpha</key>
-			<false/>
 			<key>cell</key>
 			<string>PSLinkCell</string>
+			<key>alpha</key>
+			<false/>
 			<key>cellClass</key>
 			<string>CSColorDisplayCell</string>
 			<key>defaults</key>
@@ -25,12 +23,42 @@
 			<string>Outline color</string>
 		</dict>
 		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>Change the outline size on the dock</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<integer>2</integer>
+			<key>defaults</key>
+			<string>com.qiop1379.dockoutlineprefs</string>
+			<key>key</key>
+			<string>outlineWidth</string>
+			<key>isSegmented</key>
+			<true/>
+			<key>segmentCount</key>
+			<integer>4</integer>
+			<key>max</key>
+			<integer>5</integer>
+			<key>min</key>
+			<integer>1</integer>
+			<key>showValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		</dict>
+		<dict>
 			<key>action</key>
 			<string>respring</string>
 			<key>cell</key>
 			<string>PSButtonCell</string>
 			<key>label</key>
-			<string>Respring</string>
+			<string>Apply</string>
 		</dict>
 	</array>
 	<key>title</key>
