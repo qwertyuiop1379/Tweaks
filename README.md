@@ -1,4 +1,4 @@
-This software is licensed under GPL 3.0. Please s license before distributing.
+This software is licensed under GPL 3.0. Please read license before distributing.
 
 # Tweaks
 
