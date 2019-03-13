@@ -1,13 +1,9 @@
 #include <CSColorPicker/CSColorPicker.h>
 
-@interface _UIBackdropView : UIView
-@end
-
 @interface SBRootFolderDockIconListView : UIView
 @end
 
 @interface SBFloatingDockPlatterView : UIView
-@property (nonatomic, retain) _UIBackdropView *backgroundView;
 @end
 
 @interface SBFloatingDockView : UIView
@@ -19,12 +15,15 @@ NSDictionary *prefs;
 -(void)layoutSubviews
 {
     %orig;
-    self.layer.cornerRadius = 32;
     self.layer.masksToBounds = YES;
     if ([prefs objectForKey:@"outlineWidth"])
-        self.layer.borderWidth = [[prefs objectForKey:@"outlineWidth"] floatValue];
+        self.layer.borderWidth = [[prefs objectForKey:@"outlineWidth"] doubleValue];
     else
         self.layer.borderWidth = 2;
+    if ([prefs objectForKey:@"outlineRadius"])
+        self.layer.cornerRadius = [[prefs objectForKey:@"outlineRadius"] doubleValue];
+    else
+        self.layer.cornerRadius = 32;
     if ([prefs objectForKey:@"outlineColor"])
         self.layer.borderColor = [UIColor colorFromHexString:[prefs objectForKey:@"outlineColor"]].CGColor;
     else
@@ -36,12 +35,15 @@ NSDictionary *prefs;
 -(void)layoutSubviews
 {
     %orig;
-    self.layer.cornerRadius = 32;
     self.layer.masksToBounds = YES;
     if ([prefs objectForKey:@"outlineWidth"])
-        self.layer.borderWidth = [[prefs objectForKey:@"outlineWidth"] floatValue];
+        self.layer.borderWidth = [[prefs objectForKey:@"outlineWidth"] doubleValue];
     else
         self.layer.borderWidth = 2;
+    if ([prefs objectForKey:@"outlineRadius"])
+        self.layer.cornerRadius = [[prefs objectForKey:@"outlineRadius"] doubleValue];
+    else
+        self.layer.cornerRadius = 32;
     if ([prefs objectForKey:@"outlineColor"])
         self.layer.borderColor = [UIColor colorFromHexString:[prefs objectForKey:@"outlineColor"]].CGColor;
     else

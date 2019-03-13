@@ -1,0 +1,9 @@
+Package: com.qiop1379.copy
+Name: Copy!
+Depends: mobilesubstrate
+Version: 1.0.1
+Architecture: iphoneos-arm
+Description: Triple tap on UILabels to select and copy text
+Maintainer: qwertyuiop1379
+Author: qwertyuiop1379
+Section: Tweaks

@@ -1,5 +1,5 @@
 include $(THEOS)/makefiles/common.mk
-ARCHS = armv7 arm64
+ARCHS = armv7s armv7 arm64
 
 BUNDLE_NAME = DockOutlinePrefs
 DockOutlinePrefs_FILES = DORootListController.m

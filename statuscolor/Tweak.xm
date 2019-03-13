@@ -1,32 +1,25 @@
 #include <CSColorPicker/CSColorPicker.h>
-NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.qiop1379.statuscolorprefs.plist"];
+
+NSDictionary *prefs;
 long long style;
 
 %hook UIStatusBarStyleRequest
 -(long long)style
 {
-    long long orig = %orig;
-    style = orig;
-    return orig;
+    style = %orig;
+    return style;
 }
 -(UIColor *)foregroundColor
 {
-    if ([prefs objectForKey:@"enabled"] != NO)
+    if (style == 0)
     {
-        if (style == 0)
-        {
-            if ([prefs objectForKey:@"darkContentColor"] != nil)
-            {
-                return [UIColor colorFromHexString:[prefs objectForKey:@"darkContentColor"]];
-            }
-        }
-        else
-        {
-            if ([prefs objectForKey:@"lightContentColor"] != nil)
-            {
-                return [UIColor colorFromHexString:[prefs objectForKey:@"lightContentColor"]];
-            }
-        }
+        if ([prefs objectForKey:@"darkContentColor"] != nil)
+            return [UIColor colorFromHexString:[prefs objectForKey:@"darkContentColor"]];
+    }
+    else
+    {
+        if ([prefs objectForKey:@"lightContentColor"] != nil)
+            return [UIColor colorFromHexString:[prefs objectForKey:@"lightContentColor"]];
     }
     return %orig;
 }
@@ -35,23 +28,34 @@ long long style;
 %hook _UIStatusBar
 -(UIColor *)foregroundColor
 {
-    if ([prefs objectForKey:@"enabled"] != NO)
+    if (style == 0)
     {
-        if (style == 0)
-        {
-            if ([prefs objectForKey:@"darkContentColor"] != nil)
-            {
-                return [UIColor colorFromHexString:[prefs objectForKey:@"darkContentColor"]];
-            }
-        }
-        else
-        {
-            if ([prefs objectForKey:@"lightContentColor"] != nil)
-            {
-                return [UIColor colorFromHexString:[prefs objectForKey:@"lightContentColor"]];
-            }
-        }
+        if ([prefs objectForKey:@"darkContentColor"] != nil)
+            return [UIColor colorFromHexString:[prefs objectForKey:@"darkContentColor"]];
+    }
+    else
+    {
+        if ([prefs objectForKey:@"lightContentColor"] != nil)
+            return [UIColor colorFromHexString:[prefs objectForKey:@"lightContentColor"]];
     }
     return %orig;
 }
 %end
+
+static void loadPrefs()
+{
+    CFArrayRef keyList = CFPreferencesCopyKeyList(CFSTR("com.qiop1379.statuscolorprefs"), kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+    if(keyList)
+    {
+        prefs = (__bridge NSDictionary *)CFPreferencesCopyMultiple(keyList, CFSTR("com.qiop1379.statuscolorprefs"), kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+        if (!prefs) prefs = [NSDictionary new];
+        CFRelease(keyList);
+    }
+    if (!prefs) prefs = [NSDictionary dictionaryWithContentsOfFile:@"/User/Library/Preferences/com.qiop1379.statuscolorprefs.plist"];
+}
+
+%ctor
+{
+    loadPrefs();
+    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)loadPrefs, CFSTR("com.qiop1379.statuscolorprefs/prefchanged"), NULL, CFNotificationSuspensionBehaviorCoalesce);
+}

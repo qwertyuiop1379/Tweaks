@@ -1,5 +1,5 @@
 include $(THEOS)/makefiles/common.mk
-ARCHS = armv7 arm64
+ARCHS = armv7s armv7 arm64
 
 TWEAK_NAME = DockOutline
 DockOutline_FILES = Tweak.xm

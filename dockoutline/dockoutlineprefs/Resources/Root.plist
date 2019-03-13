@@ -32,7 +32,7 @@
 			<key>cell</key>
 			<string>PSSliderCell</string>
 			<key>default</key>
-			<integer>2</integer>
+			<real>2</real>
 			<key>defaults</key>
 			<string>com.qiop1379.dockoutlineprefs</string>
 			<key>key</key>
@@ -40,11 +40,37 @@
 			<key>isSegmented</key>
 			<true/>
 			<key>segmentCount</key>
-			<integer>4</integer>
+			<real>4</real>
 			<key>max</key>
-			<integer>5</integer>
+			<real>5</real>
 			<key>min</key>
-			<integer>1</integer>
+			<real>1</real>
+			<key>showValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>Change the corner radius on the outline</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<real>32</real>
+			<key>defaults</key>
+			<string>com.qiop1379.dockoutlineprefs</string>
+			<key>key</key>
+			<string>outlineRadius</string>
+			<key>isSegmented</key>
+			<true/>
+			<key>segmentCount</key>
+			<real>50</real>
+			<key>max</key>
+			<real>50</real>
+			<key>min</key>
+			<real>0</real>
 			<key>showValue</key>
 			<true/>
 		</dict>

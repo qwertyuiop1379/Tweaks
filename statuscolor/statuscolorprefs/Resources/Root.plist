@@ -5,20 +5,8 @@
 	<key>items</key>
 	<array>
 		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<true/>
-			<key>defaults</key>
-			<string>com.qiop1379.statuscolorprefs</string>
-			<key>key</key>
-			<string>enabled</string>
-			<key>label</key>
-			<string>Enabled</string>
-		</dict>
-		<dict>
 			<key>PostNotification</key>
-			<string>Done</string>
+			<string>com.qiop1379.statuscolorprefs/prefchanged</string>
 			<key>alpha</key>
 			<false/>
 			<key>cell</key>
@@ -38,7 +26,7 @@
 		</dict>
 		<dict>
 			<key>PostNotification</key>
-			<string>Done</string>
+			<string>com.qiop1379.statuscolorprefs/prefchanged</string>
 			<key>alpha</key>
 			<false/>
 			<key>cell</key>
@@ -55,14 +43,6 @@
 			<string>lightContentColor</string>
 			<key>label</key>
 			<string>Light content color</string>
-		</dict>
-		<dict>
-			<key>action</key>
-			<string>respring</string>
-			<key>cell</key>
-			<string>PSButtonCell</string>
-			<key>label</key>
-			<string>Respring</string>
 		</dict>
 		<dict>
 			<key>cell</key>

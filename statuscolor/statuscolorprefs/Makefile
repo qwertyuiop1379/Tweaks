@@ -1,4 +1,5 @@
 include $(THEOS)/makefiles/common.mk
+ARCHS = arm64
 
 BUNDLE_NAME = StatusColorPrefs
 StatusColorPrefs_FILES = SCRootListController.m
