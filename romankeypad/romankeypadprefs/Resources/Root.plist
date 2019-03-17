@@ -12,7 +12,7 @@
 		</dict>
 		<dict>
 			<key>PostNotification</key>
-			<string>Idk</string>
+			<string>com.qiop1379.romankeypad/prefchanged</string>
 			<key>cell</key>
 			<string>PSSegmentCell</string>
 			<key>default</key>
@@ -42,7 +42,7 @@
 		</dict>
 		<dict>
 			<key>PostNotification</key>
-			<string>Idk</string>
+			<string>com.qiop1379.romankeypad/prefchanged</string>
 			<key>cell</key>
 			<string>PSSegmentCell</string>
 			<key>default</key>
@@ -65,6 +65,8 @@
 			</array>
 		</dict>
 		<dict>
+			<key>PostNotification</key>
+			<string>com.qiop1379.romankeypad/prefchanged</string>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>default</key>

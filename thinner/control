@@ -1,0 +1,10 @@
+Package: com.qiop1379.thinner
+Name: Thinner
+Depends: mobilesubstrate
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Thin the font on the lockscreen clock/date.
+Maintainer: qwertyuiop1379
+Author: qwertyuiop1379
+Section: Tweaks
+Depiction: https://qwertyuiop1379.github.io/depiction/thinner/index.html
