@@ -1,0 +1,9 @@
+Package: com.qiop1379.remember-me
+Name: RememberMe
+Depends: mobilesubstrate
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Automa alternative. Adds an option to remember the choice you picked on alerts.
+Maintainer: qwertyuiop1379
+Author: qwertyuiop1379
+Section: Tweaks
