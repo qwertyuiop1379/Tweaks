@@ -24,18 +24,6 @@ NSMutableArray *rememberedAlerts;
 }
 @end
 
-%hook SBHomeScreenViewController
--(void)viewDidLoad
-{
-    %orig;
-
-    if (![[NSFileManager defaultManager] fileExistsAtPath:@"/var/lib/dpkg/info/com.qiop1379.remember-me.list"])
-	{
-		[[[UIAlertView alloc] initWithTitle:@"RememberMe" message:@"Hello, I see that you haven't downloaded RememberMe from the Packix repo. Unfortunately, this probably means that you pirated it. While I'm not happy about that, I won't do anything to restrict you from using it. I just simply ask you to pay the amount of money you would pay for a bad cup of coffee to support me for the time and effort I put in. Thank you." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
-	}
-}
-%end
-
 %hook UIViewController
 -(void)presentViewController:(UIViewController *)viewController animated:(BOOL)animated completion:(void (^)(void))completion
 {
