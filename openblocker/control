@@ -1,0 +1,9 @@
+Package: com.qiop1379.openblocker
+Name: OpenBlocker
+Depends: mobilesubstrate, preferenceloader, com.spark.libsparkapplist
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Block certain apps from opening other apps.
+Maintainer: qwertyuiop1379
+Author: qwertyuiop1379
+Section: Tweaks

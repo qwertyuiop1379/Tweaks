@@ -1,3 +1,5 @@
+#include <UIKit/UIKit.h>
+#include <Foundation/Foundation.h>
 #include "Tweak.h"
 
 NSDictionary *preferences;
