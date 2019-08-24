@@ -22,6 +22,6 @@
 
 -(void)github
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/qwertyuiop1379/qwertyuiop1379.github.io/tree/master/source"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/qwertyuiop1379/Tweaks"]];
 }
 @end
