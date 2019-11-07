@@ -1,0 +1,9 @@
+Package: com.qiop1379.downloadbar
+Name: DownloadBar
+Depends: mobilesubstrate
+Version: 0.0.1
+Architecture: iphoneos-arm
+Description: An awesome MobileSubstrate tweak!
+Maintainer: qwertyuiop1379 <thoffman8839@gmail.com>
+Author: qwertyuiop1379 <thoffman8839@gmail.com>
+Section: Tweaks
