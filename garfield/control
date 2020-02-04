@@ -1,0 +1,9 @@
+Package: com.qiop1379.garfield
+Name: Garfield
+Depends: mobilesubstrate
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Forget to study? Know morse code? This is the perfect tweak for you.
+Maintainer: qwertyuiop1379 <thoffman8839@gmail.com>
+Author: qwertyuiop1379 <thoffman8839@gmail.com>
+Section: Tweaks
