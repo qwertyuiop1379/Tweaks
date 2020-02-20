@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Tweak</string>
+			<key>footerText</key>
+			<string>No respring required. More settings coming soon?</string>
+		</dict>
+		<dict>
+			<key>PostNotification</key>
+			<string>com.qiop1379.yessir</string>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.qiop1379.yessir</string>
+			<key>key</key>
+			<string>dark</string>
+			<key>label</key>
+			<string>Dark blur</string>
+		</dict>
+	</array>
+	<key>title</key>
+	<string>Yessir</string>
+</dict>
+</plist>

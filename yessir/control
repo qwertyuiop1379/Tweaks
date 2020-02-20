@@ -1,0 +1,10 @@
+Package: com.qiop1379.yessir
+Name: Yessir
+Depends: mobilesubstrate
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Make your alerts better
+Depiction: http://qwertyuiop1379.com/package?id=com.qiop1379.yessir
+Maintainer: qwertyuiop1379
+Author: qwertyuiop1379
+Section: Tweaks
