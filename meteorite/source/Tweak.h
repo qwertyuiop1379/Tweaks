@@ -50,9 +50,7 @@
 @end
 
 @interface SBIconController : UIViewController
-@property (nonatomic, retain) SBIconView *weatherIconView;
 @property (nonatomic, retain) WATodayModel *todayModel;
-@property (nonatomic, retain) NSTimer *weatherTimer;
 +(instancetype)sharedInstance;
 -(UIImage *)cachedWeatherIconForSize:(CGSize)arg1 format:(int)arg2 scale:(CGFloat)arg3;
 -(void)weatherTimerFired;

@@ -235,7 +235,7 @@ static double FloatForKey(NSString *key, double fallback)
 %property (nonatomic, retain) NSString *timeText;
 -(void)setFont:(UIFont *)arg1
 {
-	%orig([UIFont boldSystemFontOfSize:13]);
+	%orig(BoolForKey(@"statusBar", YES) ? [UIFont boldSystemFontOfSize:13] : arg1);
 }
 
 -(void)setText:(NSString *)arg1
@@ -246,7 +246,7 @@ static double FloatForKey(NSString *key, double fallback)
 	if (![arg1 containsString:@"\n"])
 		self.timeText = arg1;
 	
-	if ([arg1 containsString:@":"])
+	if ([arg1 containsString:@":"] && BoolForKey(@"statusBar", YES))
 		[self updateConditionImage];
 	else
 		%orig;
@@ -275,7 +275,7 @@ static double FloatForKey(NSString *key, double fallback)
 -(id)initWithApplication:(id)arg1
 {
 	self = %orig;
-	[NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(reloadIconImage) userInfo:nil repeats:YES];
+	[NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(reloadIconImage) userInfo:nil repeats:YES];
 	return self;
 }
 
@@ -296,7 +296,7 @@ static double FloatForKey(NSString *key, double fallback)
 	self = %orig;
 
 	if ([self.applicationBundleID isEqual:@"com.apple.weather"])
-		[NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(reloadIconImage) userInfo:nil repeats:YES];
+		[NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(reloadIconImage) userInfo:nil repeats:YES];
 
 	return self;
 }
@@ -329,17 +329,14 @@ static double FloatForKey(NSString *key, double fallback)
 
 %hook SBIconController
 %property (nonatomic, retain) WATodayModel *todayModel;
-%property (nonatomic, retain) NSTimer *weatherTimer;
--(void)init
+-(void)loadView
 {
 	%orig;
-
-	[MeteoriteServer load];
 
 	if (!self.todayModel)
 		[self updateTodayModel];
 
-	self.weatherTimer = [NSTimer scheduledTimerWithTimeInterval:(FloatForKey(@"refreshTimer", 5) * 60) target:self selector:@selector(weatherTimerFired) userInfo:nil repeats:YES];
+	[NSTimer scheduledTimerWithTimeInterval:(FloatForKey(@"refreshTimer", 5) * 60) target:self selector:@selector(weatherTimerFired) userInfo:nil repeats:YES];
 	[self weatherTimerFired];
 }
 
@@ -358,9 +355,6 @@ static double FloatForKey(NSString *key, double fallback)
 %new
 -(void)weatherTimerFired
 {
-	if (!BoolForKey(@"tweakActive", YES))
-		return;
-	
 	UpdateTodayModel();
 	UpdateServerData();
 }
