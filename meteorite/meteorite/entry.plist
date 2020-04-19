@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>entry</key>
+	<dict>
+		<key>bundle</key>
+		<string>Meteorite</string>
+		<key>cell</key>
+		<string>PSLinkCell</string>
+		<key>detail</key>
+		<string>MTRRootListController</string>
+		<key>icon</key>
+		<string>meteorite@3x.png</string>
+		<key>isController</key>
+		<true/>
+		<key>label</key>
+		<string>Meteorite</string>
+	</dict>
+</dict>
+</plist>

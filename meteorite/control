@@ -1,0 +1,10 @@
+Package: com.qiop1379.meteorite
+Name: Meteorite
+Depends: mobilesubstrate, com.muirey03.libmryipc
+Version: 1.2.0~beta
+Architecture: iphoneos-arm
+Description: A iOS 10-12 remake of the legendary Meteor tweak for iOS 9!
+Depiction: http://qwertyuiop1379.com/package?id=com.qiop1379.meteorite
+Maintainer: qwertyuiop1379
+Author: qwertyuiop1379
+Section: Tweaks

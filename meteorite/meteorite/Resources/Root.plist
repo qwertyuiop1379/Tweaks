@@ -1,0 +1,80 @@
+{
+	items =
+	(
+		{
+			cell = PSGroupCell;
+		},
+
+		{
+			cell = PSSwitchCell;
+			label = "Tweak active";
+			default = 1;
+			key = "tweakActive";
+			PostNotification = "com.qiop1379.meteorite";
+			defaults = "com.qiop1379.meteorite";
+		},
+
+		{
+			cell = PSGroupCell;
+			footerText = "If you change your city in the weather app, press this button to update data.";
+		},
+
+		{
+			cell = PSButtonCell;
+			label = "Update City";
+			action = "yeet";
+		},
+
+		{
+			cell = PSGroupCell;
+			footerText = "Every time this timer goes off, the weather will be updated. Respring required for this change.";
+		},
+
+		{
+			cell = PSStaticTextCell;
+			label = "Refresh timer (minutes)";
+		},
+
+		{
+			cell = PSEditTextCell;
+			keyboard = "numbers";
+			placeholder = "5";
+			key = "refreshTimer";
+			PostNotification = "com.qiop1379.meteorite";
+			defaults = "com.qiop1379.meteorite";
+		},
+
+		{
+			cell = PSGroupCell;
+		},
+
+		{
+			cell = PSSwitchCell;
+			label = "Show weather on app icon";
+			default = 1;
+			key = "appIcon";
+			PostNotification = "com.qiop1379.meteorite";
+			defaults = "com.qiop1379.meteorite";
+		},
+
+		{
+			cell = PSSwitchCell;
+			label = "Status bar icon enabled";
+			default = 1;
+			key = "statusBar";
+			PostNotification = "com.qiop1379.meteorite";
+			defaults = "com.qiop1379.meteorite";
+		},
+
+		{
+			cell = PSSwitchCell;
+			label = "Celsius";
+			default = 1;
+			key = "celsius";
+			PostNotification = "com.qiop1379.meteorite";
+			defaults = "com.qiop1379.meteorite";
+		},
+	);
+
+	title = "Meteorite";
+}
