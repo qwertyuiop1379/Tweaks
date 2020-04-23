@@ -1,0 +1,9 @@
+Package: com.qiop1379.cut
+Name: Cut
+Depends: mobilesubstrate
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Trim trailing whitespace in sent text messages.
+Maintainer: qwertyuiop1379
+Author: qwertyuiop1379
+Section: Tweaks

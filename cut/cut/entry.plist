@@ -1,0 +1,13 @@
+{
+	entry =
+	{
+		PostNotification = "com.qiop1379.cut";
+		cell = PSSwitchCell;
+		hasIcon = 1;
+		icon = "cut@3x.png";
+		label = "Cut";
+		defaults = "com.qiop1379.cut";
+		key = "enable";
+		default = 1;
+	};
+}
