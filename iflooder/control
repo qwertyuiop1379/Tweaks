@@ -1,0 +1,9 @@
+Package: com.qiop1379.iflooder
+Name: iFlooder
+Depends: mobilesubstrate
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: A tweak to spam in the messages app.
+Maintainer: qwertyuiop1379
+Author: qwertyuiop1379
+Section: Tweaks
