@@ -187,12 +187,6 @@ static UIImage *UIKitImage(NSString *name)
 {
 	%orig;
 
-	static BOOL thing = NO;
-
-	if (thing)
-		return;
-
-	thing = YES;
 	self.isFlooding = NO;
 	[NSNotificationCenter.defaultCenter addObserver:self selector:@selector(startFlooding:) name:@"iFlooder.startFlooding" object:nil];
 }
