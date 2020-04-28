@@ -40,6 +40,10 @@
 {
 	[super viewDidLoad];
 
+	UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
+    	[tapBackground setNumberOfTapsRequired:1];
+    	[self.view addGestureRecognizer:tapBackground];
+	
 	self.title = @"iFlooder";
 
 	_mode = 0;
@@ -102,6 +106,10 @@
 	[_textView.bottomAnchor constraintEqualToAnchor:self.view.centerYAnchor constant:10].active = YES;
 
 	[self updateView];
+}
+
+- (void)dismissKeyboard:(id)sender {
+    [self.view endEditing:YES];
 }
 
 -(void)updateView
