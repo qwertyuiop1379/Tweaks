@@ -5,6 +5,7 @@
 @end
 
 @interface _UIAlertControllerActionView : UIView
+-(UIAlertController *)alertController;
 @end
 
 @interface _UIInterfaceActionItemSeparatorView_iOS : UIView
@@ -14,6 +15,10 @@
 @end
 
 @interface _UIAlertControllerInterfaceActionGroupView : UIView
+-(UIAlertController *)alertController;
+@end
+
+@interface _UIInterfaceActionVibrantSeparatorView : UIView
 @end
 
 NSDictionary *preferences;
@@ -27,38 +32,49 @@ static BOOL BoolForKey(NSString *key, BOOL fallback)
 	return object ? [object boolValue] : fallback;
 }
 
+static inline BOOL ShouldHook(UIAlertController *controller)
+{
+	return (BoolForKey(controller.preferredStyle == UIAlertControllerStyleAlert ? @"alerts" : @"actionsheets", 1));
+}
+
 %hook UIAlertController
 -(void)viewWillAppear:(BOOL)arg1
 {
 	%orig;
 
-	MSHookIvar<UILabel *>(self.view, "_titleLabel").textColor = UIColor.whiteColor;
-	MSHookIvar<UILabel *>(self.view, "_messageLabel").textColor = UIColor.whiteColor;
-	[[MSHookIvar<id>(self.view, "_mainInterfaceActionsGroupView") backgroundView] removeFromSuperview];
+	if (ShouldHook(self))
+	{   
+		MSHookIvar<UILabel *>(self.view, "_titleLabel").textColor = UIColor.whiteColor;
+		MSHookIvar<UILabel *>(self.view, "_messageLabel").textColor = UIColor.whiteColor;
+		[[MSHookIvar<id>(self.view, "_mainInterfaceActionsGroupView") backgroundView] removeFromSuperview];
 
-	UIBlurEffectStyle effect = BoolForKey(@"dark", 1) ? UIBlurEffectStyleDark : UIBlurEffectStyleLight;
+		UIBlurEffectStyle effect = BoolForKey(@"dark", 1) ? UIBlurEffectStyleDark : UIBlurEffectStyleLight;
 
-	UIVisualEffectView *blur = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:effect]];
-    blur.frame = self.view.superview.bounds;
-    blur.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self.view.superview insertSubview:blur atIndex:0];
+		UIVisualEffectView *blur = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:effect]];
+		blur.frame = self.view.superview.bounds;
+		blur.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		[self.view.superview insertSubview:blur atIndex:0];
 
-	self.view.superview.alpha = 0;
+		self.view.superview.alpha = 0;
 
-    [UIView animateWithDuration:0.5f animations:^
-    {
-    	self.view.superview.alpha = 1;
-	}];
+		[UIView animateWithDuration:0.5f animations:^
+		{
+			self.view.superview.alpha = 1;
+		}];
+	}
 }
 
 -(void)viewWillDisappear:(BOOL)arg1
 {
 	%orig;
 
-	[UIView animateWithDuration:0.5f animations:^
-    {
-    	self.view.superview.alpha = 0;
-	}];
+	if (ShouldHook(self))
+	{
+		[UIView animateWithDuration:0.5f animations:^
+		{
+			self.view.superview.alpha = 0;
+		}];
+	}
 }
 %end
 
@@ -84,7 +100,8 @@ static BOOL BoolForKey(NSString *key, BOOL fallback)
 {
 	%orig;
 	
-	MSHookIvar<UIView *>(self, "backgroundView").backgroundColor = UIColor.clearColor;
+	if (BoolForKey(@"actionsheets", 1))
+		MSHookIvar<UIView *>(self, "backgroundView").backgroundColor = UIColor.clearColor;
 }
 %end
 
@@ -93,8 +110,11 @@ static BOOL BoolForKey(NSString *key, BOOL fallback)
 {
 	%orig;
 
-	self.superview.layer.cornerRadius = 15;
-	self.superview.layer.masksToBounds = YES;
+	if (ShouldHook(self.alertController))
+	{
+		self.superview.layer.cornerRadius = 15;
+		self.superview.layer.masksToBounds = YES;
+	}
 }
 %end
 
@@ -135,13 +155,27 @@ static BOOL BoolForKey(NSString *key, BOOL fallback)
 %hook _UIAlertControllerInterfaceActionGroupView
 -(void)didMoveToSuperview
 {
-	for (UIView *view in self.subviews)
+	if (ShouldHook(self.alertController))
 	{
-		if ([view isKindOfClass:%c(_UIDimmingKnockoutBackdropView)])
+		for (UIView *view in self.subviews)
 		{
-			view.hidden = 1;
+			if ([view isKindOfClass:%c(_UIDimmingKnockoutBackdropView)])
+				view.hidden = 1;
 		}
 	}
+}
+%end
+
+%hook _UIInterfaceActionVibrantSeparatorView
+-(void)didMoveToSuperview
+{
+	%orig;
+	self.alpha = 0;
+}
+
+-(void)setAlpha:(CGFloat)arg1
+{
+	%orig(0);
 }
 %end
 

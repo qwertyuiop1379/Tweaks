@@ -1,7 +1,7 @@
 Package: com.qiop1379.yessir
 Name: Yessir
 Depends: mobilesubstrate
-Version: 1.0.0
+Version: 1.1.1
 Architecture: iphoneos-arm
 Description: Make your alerts better
 Depiction: http://qwertyuiop1379.com/package?id=com.qiop1379.yessir
