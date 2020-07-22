@@ -5,7 +5,7 @@ _count:
 	ret
 
 _init:
-	stp x19, x30, [sp, #0x10]!
+	stp x19, x30, [sp, #-0x10]!
 
 	adrp x0, selector@page
 	add x0, x0, selector@pageoff
