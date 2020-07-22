@@ -5,8 +5,7 @@ _count:
 	ret
 
 _init:
-	sub sp, sp, #0x10
-	stp x29, x30, [sp]
+	stp x19, x30, [sp, #0x10]!
 
 	adrp x0, selector@page
 	add x0, x0, selector@pageoff
@@ -23,7 +22,7 @@ _init:
 	add x3, x3, types@pageoff
 	bl _class_addMethod
 
-	ldp x29, x30, [sp], #0x10
+	ldp x19, x30, [sp], #0x10
 	ret
 
 .section __DATA, __mod_init_func
