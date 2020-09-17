@@ -1,0 +1,9 @@
+Package: com.qiop1379.spotlightgo
+Name: SpotlightGo
+Depends: mobilesubstrate
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Launch apps from spotlight by pressing "Search"
+Maintainer: qwertyuiop1379 <thoffman8839@gmail.com>
+Author: qwertyuiop1379 <thoffman8839@gmail.com>
+Section: Tweaks
