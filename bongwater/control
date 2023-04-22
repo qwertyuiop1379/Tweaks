@@ -1,0 +1,9 @@
+Package: com.qiop1379.bongwater
+Name: Bongwater
+Depends: mobilesubstrate, firmware (>= 13.0)
+Version: 1.2.0
+Architecture: iphoneos-arm
+Description: Completely redesign the phone app contacts screen
+Maintainer: qwertyuiop1379 <thoffman8839@gmail.com>
+Author: qwertyuiop1379 <thoffman8839@gmail.com>
+Section: Tweaks
